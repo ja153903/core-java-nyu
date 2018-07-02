@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
 
-
 public class InnerClassTest {
     public static void main(String[] args) {
         TalkingClock clock = new TalkingClock(1000, true);
@@ -14,13 +13,6 @@ public class InnerClassTest {
 
         JOptionPane.showMessageDialog(null, "Quit program?");
         System.exit(0);
-    }
-
-    public class TimePrinter implements ActionListener {
-        public void actionPerformed(ActionEvent event) {
-            System.out.println("At the tone, the time is " + new Date());
-            if (TalkingClock.this.beep) Toolkit.getDefaultToolkit().beep();
-        }
     }
 
     class TalkingClock {
@@ -36,6 +28,13 @@ public class InnerClassTest {
             ActionListener listener = new TimePrinter();
             Timer t = new Timer(interval, listener);
             t.start();
+        }
+
+        public class TimePrinter implements ActionListener {
+            public void actionPerformed(ActionEvent event) {
+                System.out.println("At the tone, the time is " + new Date());
+                if (beep) Toolkit.getDefaultToolkit().beep();
+            }
         }
     }
 }
